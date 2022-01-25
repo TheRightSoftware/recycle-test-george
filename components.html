@@ -65,22 +65,16 @@
                               </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Select Components</label><br>
-                                <button class="btn btn-danger">Metal</button>
-                                <button class="btn btn-info">Solid</button>
-                                <button class="btn btn-success">Plastic</button>
-                                <button class="btn btn-primary">Gasses</button>
-                                <button class="btn btn-warning">Chemical</button>
-                              </div>
+                            <label>Select a Component Type</label>
+                             <select class="form-select mb-4 form-control" onfocus='this.size=10;' onblur='this.size=0;' onchange='this.size=1; this.blur();'>
+                            <option selected>Select a Component Type</option>
+                            <option class="red" value="red">Solid</option>
+                            <option class="black" value="black">Gasses</option>
+                            <option class="blue" value="blue">Metal</option>
+                            </select>
+                          
                         </div>
                     </div>
-                        <!-- <select class="form-select mb-4">
-                            <option selected>Metal</option>
-                            <option value="1">Solid</option>
-                            <option value="2">Gasses</option>
-                            <option value="3">Three</option>
-                            </select> -->
                             <label>How many Components did you receive?</label><br>
                         <!-- <button id="minus" class="">−</button> -->
                         <input type="number" value="0" id="input" />

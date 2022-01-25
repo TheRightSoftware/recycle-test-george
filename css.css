@@ -186,3 +186,21 @@
     vertical-align: middle !important;
     margin-top: 10px;
   }
+  .red{
+    background: red !important;
+  }
+  .black{
+    background: green;
+  }
+  .blue{
+    background: blue;
+  }
+   .black:hover {
+   background: green;
+}
+.red:hover {
+  background: red;
+}
+.blue:hover {
+  background: blue;
+}
