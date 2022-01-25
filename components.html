@@ -5,10 +5,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="css.css">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet"/>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         </head>
     <body>
         <nav class="navbar navbar-light fixed-top navbar-expand-sm">
@@ -65,14 +68,16 @@
                               </div>
                         </div>
                         <div class="col-sm-6">
-                            <label>Select a Component Type</label>
-                             <select class="form-select mb-4 form-control" onfocus='this.size=10;' onblur='this.size=0;' onchange='this.size=1; this.blur();'>
+                            <label>Select a Component Type</label><br>
+                            <select name="DropDownID" id="DropDownID">
+                                <option selected>Select Component</option>
+                            </select>
+                             <!-- <select class="form-select mb-4 form-control" onfocus='this.size=10;' onblur='this.size=0;' onchange='this.size=1; this.blur();'>
                             <option selected>Select a Component Type</option>
                             <option class="red" value="red">Solid</option>
                             <option class="black" value="black">Gasses</option>
                             <option class="blue" value="blue">Metal</option>
-                            </select>
-                          
+                            </select> -->
                         </div>
                     </div>
                             <label>How many Components did you receive?</label><br>
@@ -92,20 +97,53 @@
 </html>
 
 <script>
-  const minusButton = document.getElementById('minus');
-const plusButton = document.getElementById('plus');
-const inputField = document.getElementById('input');
+ $(function() {
+  $.widget("custom.selectmenu", $.ui.selectmenu, {
+    _renderItem: function(ul, item) {
 
-minusButton.addEventListener('click', event => {
-event.preventDefault();
-const currentValue = Number(inputField.value) || 0;
-inputField.value = currentValue - 1;
+      console.log(item);
+      var li = $("<li>"),
+        wrapper = $("<div>");
+
+      if (item.disabled) {
+        li.addClass("ui-state-disabled");
+      }
+
+      $("<span>", {
+          style: "background-color: #" + item.value,
+          "class": "ui-color-chip"
+        })
+        .appendTo(wrapper);
+      wrapper.append(item.label);
+
+      return li.append(wrapper).appendTo(ul);
+    }
+  });
+
+  $("#DropDownID")
+    .selectmenu()
+    .selectmenu("menuWidget")
+    .addClass("ui-menu-icons customicons");
+
+  var Color = {
+    Data: [
+
+      {
+        RgbValue: 'ff0000',
+        ColorName: 'Plastic'
+      }, {
+        RgbValue: '008000',
+        ColorName: 'Solid'
+      },
+      {
+        RgbValue: '000000',
+        ColorName: 'Liquid'
+      },
+    ]
+  };
+
+  for (var i = 0; i < Color.Data.length; i++) {
+    $("#DropDownID").append($("<option></option>").val(Color.Data[i].RgbValue).html(Color.Data[i].ColorName)		);
+  }
 });
-
-plusButton.addEventListener('click', event => {
-event.preventDefault();
-const currentValue = Number(inputField.value) || 0;
-inputField.value = currentValue + 1;
-});
-
 </script>
